@@ -13,3 +13,11 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+
+*~.nib
+*.swp
+.DS_Store
+*.model
+*.perspective
+*.pbxuser
+
