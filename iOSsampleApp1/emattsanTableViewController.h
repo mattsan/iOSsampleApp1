@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface emattsanTableViewController : UITableViewController
+{
+    IBOutlet UILabel *eventCountLabel;
+}
 
-@property (readwrite) NSDictionary *eventData;
+@property (readwrite) NSArray    *events;
+@property (readwrite) NSUInteger eventCount;
 
 @end

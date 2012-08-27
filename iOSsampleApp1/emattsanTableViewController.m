@@ -15,7 +15,8 @@
 
 @implementation emattsanTableViewController
 
-@synthesize eventData;
+@synthesize events;
+@synthesize eventCount;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -60,9 +61,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSInteger results_returned;
-    [[eventData objectForKey:@"results_returned"] getValue:&results_returned];
-    return results_returned;
+    eventCountLabel.text = [NSString stringWithFormat:@"%ld 件のイベントがヒットしました", (long)eventCount];
+    return eventCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,9 +74,7 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
-    NSArray* events = [eventData objectForKey:@"events"];
-    
+        
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [[events objectAtIndex:indexPath.row] objectForKey:@"title"]];
     
     return cell;
@@ -87,7 +85,6 @@
 {
     NSUInteger                   row     = self.tableView.indexPathForSelectedRow.row;
     emattsanDetailViewController *detail = segue.destinationViewController;
-    NSArray                      *events = [eventData objectForKey:@"events"];
 
     detail.eventTitle  = [[events objectAtIndex:row] objectForKey:@"title"];
     detail.description = [[events objectAtIndex:row] objectForKey:@"description"];
