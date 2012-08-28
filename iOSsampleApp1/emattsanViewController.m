@@ -9,8 +9,6 @@
 #import "emattsanViewController.h"
 #import "emattsanTableViewController.h"
 
-#import "Classes/SBJson.h"
-
 @interface emattsanViewController ()
 
 @end
@@ -42,15 +40,18 @@
     NSMutableArray *events    = [[NSMutableArray alloc] init];
     NSUInteger     start      = 1;
 
+    NSMutableString *keywords = [[NSMutableString alloc] init];
+    [[searchField.text componentsSeparatedByString:@" "] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) { if( ! [obj isEqualToString:@""]) { [keywords appendFormat:@"&keyword=%@", obj]; } }];
+    NSLog(@"keywords = %@", keywords);
+    
     do
     {
         // TODO: to use sendAsynchronousRequest:queue:completionHandler:
-        NSString     *request    = [NSString stringWithFormat:@"http://connpass.com/api/v1/event/?keyword=%@&count=%ld&start=%ld", searchField.text, (long)count, (long)start];
+        NSString     *request    = [NSString stringWithFormat:@"http://connpass.com/api/v1/event/?&count=%ld&start=%ld%@", (long)count, (long)start, keywords];
         NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[request stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         NSData       *response   = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:nil error:nil];
-        NSString     *result     = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-        NSDictionary *connpass   = [result JSONValue];
-        
+        NSDictionary *connpass   = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:NULL];
+
         [[connpass objectForKey:@"results_returned"] getValue:&results_returned];
         eventCount += results_returned;
         [events addObjectsFromArray:[connpass objectForKey:@"events"]];
