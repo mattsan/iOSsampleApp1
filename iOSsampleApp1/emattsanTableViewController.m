@@ -7,7 +7,7 @@
 //
 
 #import "emattsanTableViewController.h"
-#import "emattsanDetailViewController.h"
+#import "emattsanSummaryViewController.h"
 
 @interface emattsanTableViewController ()
 
@@ -83,13 +83,10 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSUInteger                   row     = self.tableView.indexPathForSelectedRow.row;
-    emattsanDetailViewController *detail = segue.destinationViewController;
+    emattsanSummaryViewController *summary = segue.destinationViewController;
 
-    detail.eventTitle  = [[events objectAtIndex:row] objectForKey:@"title"];
-    detail.description = [[events objectAtIndex:row] objectForKey:@"description"];
-
-    NSLog(@"%@", detail.eventTitle);
+    summary.row    = self.tableView.indexPathForSelectedRow.row;
+    summary.events = events;
 }
 
 /*

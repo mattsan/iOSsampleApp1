@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface emattsanViewController : UIViewController
+@interface emattsanViewController : UIViewController<UITextFieldDelegate>
 {
     IBOutlet UITextField *searchField;
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;
 
 @end

@@ -26,22 +26,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h5B-9x-0dS">
-                                <rect key="frame" x="124" y="88" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="検索">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
                                 <connections>
-                                    <segue destination="gH8-en-DPW" kind="push" id="zyQ-aM-8et"/>
+                                    <outlet property="delegate" destination="2" id="YgX-nw-scx"/>
+                                    <segue destination="gH8-en-DPW" kind="push" id="vAm-sa-DeE"/>
                                 </connections>
-                            </button>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -88,7 +77,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="cU5-Et-jhQ" kind="push" id="gp4-00-96K"/>
+                                    <segue destination="Scs-gJ-mMx" kind="push" id="Q3F-mr-JYp"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -136,6 +125,56 @@
                     </connections>
                 </viewController>
             </objects>
+            <point key="canvasLocation" x="1960" y="156"/>
+        </scene>
+        <!--Emattsan Summary View Controller - イベントサマリー-->
+        <scene sceneID="kmG-Ic-Jnf">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZJW-19-2fT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Scs-gJ-mMx" customClass="emattsanSummaryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RzN-9d-Yvi">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vm7-OX-uNO">
+                                <rect key="frame" x="124" y="359" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="詳細">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="cU5-Et-jhQ" kind="push" id="cCz-Ue-GAP"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="XDf-Ic-uo3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="P62-5d-cMi">
+                                <rect key="frame" x="0.0" y="77" width="320" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="イベントサマリー" id="Oad-r7-dzv"/>
+                    <connections>
+                        <outlet property="catchView" destination="P62-5d-cMi" id="d8a-ze-A4a"/>
+                        <outlet property="titleView" destination="XDf-Ic-uo3" id="1uc-4N-P7f"/>
+                    </connections>
+                </viewController>
+            </objects>
             <point key="canvasLocation" x="1516" y="156"/>
         </scene>
         <!--Navigation Controller-->
@@ -163,6 +202,13 @@
             <relationships>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="emattsanSummaryViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/emattsanSummaryViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="catchView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="titleView" candidateClass="UITextView"/>
             </relationships>
         </class>
         <class className="emattsanTableViewController" superclassName="UITableViewController">
