@@ -16,5 +16,7 @@
 
 @property (readwrite) NSUInteger row;
 @property (readwrite) NSArray    *events;
+@property (readwrite) NSArray    *titles;
+@property (readwrite) NSArray    *details;
 
 @end

@@ -17,6 +17,8 @@
 
 @synthesize row;
 @synthesize events;
+@synthesize titles;
+@synthesize details;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,7 +64,32 @@
 {
     if(section == 0)
     {
-        return 5;
+        // TODO: to format date and time
+        // TODO: to format object when it's null
+        NSString *started_at = [[events objectAtIndex:row] objectForKey:@"started_at"];
+        NSString *ended_at   = [[events objectAtIndex:row] objectForKey:@"ened_at"];
+        
+        titles  = [NSArray arrayWithObjects:
+                   [[events objectAtIndex:row] objectForKey:@"title"],
+                   @"",
+                   @"開催場所",
+                   @"開催会場",
+                   @"開催日時",
+                   @"定員",
+                   @"参加者数",
+                   @"補欠者数",
+                   nil];
+        details = [NSArray arrayWithObjects:
+                   @"",
+                   [NSString stringWithFormat:@"%@", [[events objectAtIndex:row] objectForKey:@"catch"]],
+                   [NSString stringWithFormat:@"%@", [[events objectAtIndex:row] objectForKey:@"address"]],
+                   [NSString stringWithFormat:@"%@", [[events objectAtIndex:row] objectForKey:@"place"]],
+                   [NSString stringWithFormat:@"%@〜%@", started_at, ended_at],
+                   [NSString stringWithFormat:@"%@ 名", [[events objectAtIndex:row] objectForKey:@"limit"]],
+                   [NSString stringWithFormat:@"%@ 名", [[events objectAtIndex:row] objectForKey:@"accepted"]],
+                   [NSString stringWithFormat:@"%@ 名", [[events objectAtIndex:row] objectForKey:@"waiting"]],
+                   nil];
+        return 8;
     }
     else
     {
@@ -83,34 +110,8 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         }
         
-        switch(indexPath.row)
-        {
-        case 0:
-            cell.textLabel.text = [[events objectAtIndex:row] objectForKey:@"title"];
-            break;
-
-        case 1:
-            cell.textLabel.text = [[events objectAtIndex:row] objectForKey:@"catch"];
-            break;
-
-        case 2:
-            cell.textLabel.text       = @"定員";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [[events objectAtIndex:row] objectForKey:@"limit"]];
-            break;
-
-        case 3:
-            cell.textLabel.text       = @"参加者数";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [[events objectAtIndex:row] objectForKey:@"accepted"]];
-            break;
-            
-        case 4:
-            cell.textLabel.text       = @"補欠者数";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [[events objectAtIndex:row] objectForKey:@"waiting"]];
-            break;
-
-        default:
-            break;
-        }
+        cell.textLabel.text       = [titles objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [details objectAtIndex:indexPath.row];
         return cell;
     }
     else
